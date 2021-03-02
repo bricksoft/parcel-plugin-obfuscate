@@ -1,0 +1,29 @@
+name: pull-request
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  integration-tests:
+    strategy:
+      matrix:
+        node_version: ['10', '12']
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check out code
+      - uses: actions/checkout@v2
+      - name: Set up node 
+        uses: actions/setup-node@v1 
+        with:
+          node-version: ${{ matrix.node_version }}
+      - name: use cache 
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-${{ matrix.node_version }}-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependencies
+        run: yarn
+      - name: Run tests
+        run: yarn test 
