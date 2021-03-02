@@ -1,13 +1,13 @@
 {
   "name": "parcel-plugin-obfuscate",
-  "version": "2.0.0",
+  "version": "2.1.1",
   "description": "Uses javascript-obfuscator to obfuscate entry files",
   "main": "src/index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --timeout 50000"
+    "test": "mocha --extension .test.js"
   },
   "repository": {
     "type": "git",
@@ -27,13 +27,15 @@
   },
   "homepage": "https://github.com/jabuco/parcel-plugin-obfuscate#readme",
   "peerDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "<=1.12.3"
   },
   "dependencies": {
-    "javascript-obfuscator": "^0.27.2"
+    "javascript-obfuscator": "^2.10.7"
   },
   "devDependencies": {
-    "mocha": "^6.2.0",
-    "parcel-assert-bundle-tree": "^1.0.0"
+    "mocha": "^8.3.0",
+    "nyc": "^15.1.0",
+    "parcel-assert-bundle-tree": "^1.0.0",
+    "parcel-bundler": "<=1.12.3"
   }
 }

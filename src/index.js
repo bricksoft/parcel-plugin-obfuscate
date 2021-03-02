@@ -1,3 +1,4 @@
-module.exports = bundler => {
-  bundler.addPackager("js", require.resolve("./ObfuscateAsset"));
+module.exports = (bundler) => {
+  bundler.addPackager("js", require.resolve("./ObfuscatePackager"));
+  return bundler;
 };
