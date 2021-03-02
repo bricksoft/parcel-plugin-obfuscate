@@ -1,35 +1,15 @@
-const { Asset } = require("parcel-bundler");
+const JSAsset = require("parcel-bundler/src/assets/JSAsset");
+const JSPackager = require("parcel-bundler/src/packagers/JSPackager");
 const Obfuscator = require("javascript-obfuscator");
 
-class ObfuscateAsset extends Asset {
-  async transform(v) {
-    const isProd = process.env.NODE_ENV === "production";
-    const options = {
-      debugProtection: isProd,
-      debugProtectionInterval: isProd,
-      log: false,
-      sourceMap: !isProd,
-      sourceMapMode: "separate",
-      target: this.options.target
-    };
-    const compiled = Obfuscator.obfuscate(
-      v || this.contents.toString(),
-      options
-    );
-    return {
-      value: compiled.getObfuscatedCode(),
-      map: compiled.getSourceMap()
-    };
-  }
-  async generate() {
-    const data = await this.transform();
-    const result = [
-      {
-        type: "js",
-        ...data
-      }
-    ];
-    return result;
+class ObfuscatePackager extends JSPackager {
+  async addAsset(asset) {
+    // On production only
+    if (this.options.minify) {
+      asset.generated.js = await Obfuscator.obfuscate(asset.generated.js).getObfuscatedCode();
+    }
+    return super.addAsset(asset);
   }
 }
-module.exports = ObfuscateAsset;
+
+module.exports = ObfuscatePackager;
