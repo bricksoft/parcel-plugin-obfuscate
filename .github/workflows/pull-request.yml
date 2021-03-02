@@ -4,13 +4,13 @@ on:
     branches: [ main ]
 jobs:
   integration-tests:
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         node_version: ['10', '12']
         os: [ubuntu-latest, windows-latest, macOS-latest]
-    runs-on: ${{ matrix.os }}
+    name: Run tests
     steps:
-      - name: Check out code
       - uses: actions/checkout@v2
       - name: Set up node 
         uses: actions/setup-node@v1 
@@ -19,11 +19,9 @@ jobs:
       - name: use cache 
         uses: actions/cache@v2
         with:
-          path: |
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-${{ matrix.node_version }}-${{ hashFiles('**/package-lock.json') }}
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ matrix.node_version }}-${{ hashFiles('**/yarn.json') }}
       - name: Install dependencies
-        run: yarn
+        run: yarn install --frozen-lockfile
       - name: Run tests
         run: yarn test 
