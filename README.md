@@ -1,4 +1,4 @@
-# parcel-plugin-obfuscate [![npm version](https://badge.fury.io/js/parcel-plugin-obfuscate.svg)](https://npmjs.com/package/parcel-plugin-obfuscate) [![npm dependencies](https://david-dm.org/jabuco/parcel-plugin-obfuscate.svg)](https://github.com/jabuco/parcel-plugin-obfuscate.git)
+# parcel-plugin-obfuscate ![npm](https://img.shields.io/npm/v/parcel-plugin-obfuscate) ![Libraries.io dependency status for GitHub repo](https://img.shields.io/librariesio/github/jabuco/parcel-plugin-obfuscate?style=plastic)
 
 This plugin allows you to obfuscate entry javascript files using [javascript-obfuscator](https://github.com/javascript-obfuscator/javascript-obfuscator).
 
@@ -6,13 +6,25 @@ This plugin allows you to obfuscate entry javascript files using [javascript-obf
 
 To get started using your favourite package manager.
 
-### install using yarn
+### Install using yarn
 
 > yarn add -D parcel-plugin-obfuscate
 
-### install using npm
+### Install using npm
 
 > npm install -D parcel-plugin-obfuscate
+
+### Run parcel in production mode to obfuscate code
+
+#### Using Yarn
+
+> yarn cross-env NODE_ENV=production parcel build ./index.js
+
+#### Using npm
+
+> npx cross-env NODE_ENV=production parcel build ./index.js
+
+This runs cross-env which sets NODE_ENV to `production` which enables this plugin in parcel and later obfuscates the compiled code.
 
 ## Example
 
