@@ -26,6 +26,14 @@ To get started using your favourite package manager.
 
 This runs cross-env which sets NODE_ENV to `production` which enables this plugin in parcel and later obfuscates the compiled code.
 
+### Add configuration (optional)
+
+> cd ROOT_YOUR_PROJECT
+> 
+> touch obfuscator.config.js
+> 
+> add in file needed presets from https://github.com/javascript-obfuscator/javascript-obfuscator#preset-options 
+
 ## Example
 
 from this:
